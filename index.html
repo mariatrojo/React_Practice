@@ -1,0 +1,93 @@
+<script src="node_modules/react/umd/react.development.js"></script>
+<script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+
+<p>Time with Vanilla Javascript:</p>
+	
+<div id="todaysDate"></div>
+
+<div id="reactTime"></div>
+
+<div id="helloDojo"></div>
+
+<div id="test"></div>
+
+<div id="composableSquares"></div>
+
+<script>
+
+	console.log("React: " + React);
+	console.log("ReactDOM: " + ReactDOM);
+
+	////////////////////////////////////////////
+// JAVASCRIPT TIME
+
+function doDate(){
+	var str = "";
+	var now = new Date();
+	var hours = now.getHours();
+	var seconds = now.getSeconds();
+	var minutes = now.getMinutes();
+	var ampm = hours >= 12 ? 'pm' : 'am';
+	hours = hours % 12;
+	minutes = minutes < 10 ? '0'+minutes : minutes;
+	seconds = seconds < 10 ? '0'+seconds : seconds;
+
+    str += "The time is: " + hours +":" + minutes + ":" + seconds + ampm;
+    document.getElementById("todaysDate").innerHTML = str;
+}
+
+setInterval(doDate, 1000);
+
+
+////////////////////////////////////////////
+// REACT TIME
+
+function upDate(){
+	var now = new Date();
+	var localTime = now.toLocaleTimeString('en-US');
+	const reactTitle = React.createElement('p', null, 'Time with React: ')
+	const myButton2 = React.createElement('p', null, localTime);
+
+	ReactDOM.render([reactTitle, myButton2], document.getElementById('reactTime'));
+}
+
+
+setInterval(upDate, 1000);
+
+////////////////////////////////////////////
+// HELLO DOJO
+
+const li1 = React.createElement('li', null, 'Learn React');
+const li2 = React.createElement('li', null, 'Climb Mt. Everest');
+const li3 = React.createElement('li', null, 'un a marathon');
+const li4 = React.createElement('li', null, 'Feed the dogs');
+
+const list1 = React.createElement('ul', null, li1, li2, li3, li4);
+
+const title = React.createElement('h1', null, 'Hello Dojo!');
+const title2 = React.createElement('h2', null, 'Things I need to do:');
+
+const div1 = React.createElement('div', null, title, title2, list1);
+
+
+ReactDOM.render(div1, document.getElementById('helloDojo'));
+
+////////////////////////////////////////////
+// TEST
+const HeadlineComponent = (props) => {
+    return React.createElement('h1', null, 'Hello Dojo!');
+}
+
+ReactDOM.render(HeadlineComponent(), document.getElementById('test'));
+
+////////////////////////////////////////////
+// COMPOSABLE SQUARES
+
+ReactDOM.render(
+React.createElement('h1', { style: { backgroundColor: 'pink' } }, 'This text should have a pink background!'),
+document.getElementById('composableSquares')
+);
+
+////////////////////////////////////////////
+
+</script>
